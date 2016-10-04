@@ -12,6 +12,7 @@ import MobileCoreServices
 
 class ViewController: UIViewController {
     
+    @IBOutlet var pidCameraOverlayView: UIView!
     @IBOutlet weak var cameraPreviewImage: UIImageView!
     @IBOutlet weak var takePhotoButton: UIButton!
     
@@ -19,14 +20,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.setupImagePicker()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     private func setupImagePicker() {
-
-    }
-    
-    @IBAction func takePhotoButtonClicked(sender: AnyObject) {
         self.imagePicker = UIImagePickerController()
         self.imagePicker.delegate = self
         
@@ -36,10 +36,48 @@ class ViewController: UIViewController {
             self.imagePicker.sourceType = .PhotoLibrary
         }
         
-        self.imagePicker.allowsEditing = true
+        self.imagePicker.showsCameraControls = false
         self.imagePicker.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(self.imagePicker.sourceType)!
         
         self.presentViewController(self.imagePicker, animated: true, completion: nil)
+    }
+    
+    private func showImagePickerForSourceType(sourceType: UIImagePickerControllerSourceType) {
+        if self.cameraPreviewImage.isAnimating() {
+            self.cameraPreviewImage.stopAnimating()
+        }
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.modalPresentationStyle = .CurrentContext
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
+        imagePicker.modalPresentationStyle = (sourceType == .Camera) ? .FullScreen : .Popover
+        
+        let presentationController = imagePicker.popoverPresentationController
+        presentationController?.permittedArrowDirections = .Any
+        
+        if sourceType == .Camera {
+            imagePicker.showsCameraControls = false
+            NSBundle.mainBundle().loadNibNamed("PidCameraOverlay", owner: self, options: nil)
+            self.pidCameraOverlayView!.frame = (imagePicker.cameraOverlayView?.frame)!
+            imagePicker.cameraOverlayView = self.pidCameraOverlayView
+            self.pidCameraOverlayView = nil
+        }
+        
+        self.imagePicker = imagePicker
+        self.presentViewController(self.imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func takePhotoButtonClicked(sender: AnyObject) {
+        self.imagePicker.takePicture()
+    }
+    
+    @IBAction func takePhotoMode(sender: AnyObject) {
+        self.showImagePickerForSourceType(.Camera)
+    }
+    
+    private func finishAndUpdate() {
+        
     }
 }
 
@@ -58,4 +96,6 @@ extension ViewController: UINavigationControllerDelegate, UIImagePickerControlle
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
 }
