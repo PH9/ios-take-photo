@@ -8,18 +8,67 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    @IBOutlet weak var cameraPreviewImage: UIImageView!
+    
+    var capturedImages: NSMutableArray = NSMutableArray()
+    var imagePickerController: UIImagePickerController!
+    let sourceType = UIImagePickerControllerSourceType.Camera
+    var isCameraAvailable = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.isCameraAvailable = UIImagePickerController.isSourceTypeAvailable(self.sourceType)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setUpCameraPreview()
     }
+    
+    private func setUpCameraPreview() {
+        guard self.isCameraAvailable else {
+            return
+        }
+        
+        if self.cameraPreviewImage.isAnimating() {
+            self.cameraPreviewImage.stopAnimating()
+        }
 
-
+        self.imagePickerController = UIImagePickerController()
+        self.imagePickerController.modalPresentationStyle = .CurrentContext
+        self.imagePickerController.sourceType = self.sourceType
+        self.imagePickerController.delegate = self
+        self.imagePickerController.modalPresentationStyle = .FullScreen
+        
+        self.imagePickerController.showsCameraControls = false;
+        
+        self.presentViewController(self.imagePickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func takePhoto(sender: AnyObject) {
+        guard self.isCameraAvailable else {
+            return
+        }
+        
+        if self.isCameraAvailable {
+            self.imagePickerController.takePicture()
+        }
+    }
 }
 
+extension ViewController {
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.capturedImages.addObject(image)
+            self.finishTakePhotoUpdateUI()
+        }
+    }
+    
+    private func finishTakePhotoUpdateUI() {
+
+    }
+}
