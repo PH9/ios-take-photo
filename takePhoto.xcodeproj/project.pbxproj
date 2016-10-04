@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65097BE81DA3B2E0006CCC9D /* PidCameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65097BE71DA3B2E0006CCC9D /* PidCameraOverlay.xib */; };
 		65224CCD1DA2667100EDBDD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65224CCC1DA2667100EDBDD6 /* AppDelegate.swift */; };
 		65224CCF1DA2667100EDBDD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65224CCE1DA2667100EDBDD6 /* ViewController.swift */; };
 		65224CD21DA2667100EDBDD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65224CD01DA2667100EDBDD6 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		65097BE71DA3B2E0006CCC9D /* PidCameraOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PidCameraOverlay.xib; sourceTree = "<group>"; };
 		65224CC91DA2667100EDBDD6 /* takePhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = takePhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65224CCC1DA2667100EDBDD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65224CCE1DA2667100EDBDD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		65224CCB1DA2667100EDBDD6 /* takePhoto */ = {
 			isa = PBXGroup;
 			children = (
+				65224CE11DA26ABA00EDBDD6 /* Camera */,
 				65224CCC1DA2667100EDBDD6 /* AppDelegate.swift */,
 				65224CCE1DA2667100EDBDD6 /* ViewController.swift */,
 				65224CD01DA2667100EDBDD6 /* Main.storyboard */,
@@ -65,6 +68,14 @@
 				65224CD31DA2667100EDBDD6 /* takePhoto.xcdatamodeld */,
 			);
 			path = takePhoto;
+			sourceTree = "<group>";
+		};
+		65224CE11DA26ABA00EDBDD6 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				65097BE71DA3B2E0006CCC9D /* PidCameraOverlay.xib */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65224CDA1DA2667100EDBDD6 /* LaunchScreen.storyboard in Resources */,
+				65097BE81DA3B2E0006CCC9D /* PidCameraOverlay.xib in Resources */,
 				65224CD71DA2667100EDBDD6 /* Assets.xcassets in Resources */,
 				65224CD21DA2667100EDBDD6 /* Main.storyboard in Resources */,
 			);
@@ -256,6 +268,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = takePhoto/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.silom313.takePhoto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -267,6 +280,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = takePhoto/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.silom313.takePhoto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -292,6 +306,7 @@
 				65224CE01DA2667100EDBDD6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
