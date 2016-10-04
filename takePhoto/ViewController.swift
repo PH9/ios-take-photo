@@ -59,7 +59,9 @@ class ViewController: UIViewController {
         if sourceType == .Camera {
             imagePicker.showsCameraControls = false
             NSBundle.mainBundle().loadNibNamed("PidCameraOverlay", owner: self, options: nil)
+    
             self.pidCameraOverlayView!.frame = (imagePicker.cameraOverlayView?.frame)!
+            
             imagePicker.cameraOverlayView = self.pidCameraOverlayView
             self.pidCameraOverlayView = nil
         }
