@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,26 +18,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d6K-sg-dur">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zho-jJ-xqR">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zho-jJ-xqR">
                                 <rect key="frame" x="83" y="420" width="155" height="30"/>
                                 <state key="normal" title="เปลี่ยนเป็นโหมดถ่ายภาพ"/>
                                 <connections>
                                     <action selector="takePhotoMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zhk-3H-bMj"/>
                                 </connections>
                             </button>
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d6K-sg-dur">
+                                <rect key="frame" x="0.0" y="140" width="320" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="d6K-sg-dur" secondAttribute="height" multiplier="1.6:1" id="X51-Ik-7Uv"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="d6K-sg-dur" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="3dg-xG-9e9"/>
-                            <constraint firstItem="zho-jJ-xqR" firstAttribute="centerX" secondItem="d6K-sg-dur" secondAttribute="centerX" id="IxT-0t-cba"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="d6K-sg-dur" secondAttribute="bottom" id="Ubs-az-BBv"/>
-                            <constraint firstItem="d6K-sg-dur" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VRf-rz-jFH"/>
-                            <constraint firstItem="zho-jJ-xqR" firstAttribute="top" secondItem="d6K-sg-dur" secondAttribute="bottom" constant="-60" id="Z6A-up-DyD"/>
-                            <constraint firstAttribute="trailing" secondItem="d6K-sg-dur" secondAttribute="trailing" id="arP-Dp-dml"/>
+                            <constraint firstItem="d6K-sg-dur" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="M3r-30-y7h"/>
+                            <constraint firstItem="d6K-sg-dur" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="QZ5-Q1-Nfx"/>
+                            <constraint firstItem="d6K-sg-dur" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pKk-9v-d6t"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
