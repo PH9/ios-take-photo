@@ -93,7 +93,7 @@ class ViewController: UIViewController {
     }
     
     private func finishAndUpdate() {
-        
+    
     }
 }
 
@@ -108,37 +108,33 @@ extension ViewController: UINavigationControllerDelegate, UIImagePickerControlle
         
         if mediaType == (kUTTypeImage as String) {
             let image = info[UIImagePickerControllerOriginalImage] as? UIImage
-            self.cameraPreviewImage.image = pidCropImage(image!)
+
+            self.cameraPreviewImage.image = pidCropImage(image!.fixOrientation())
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+
     
     private func pidCropImage(image: UIImage) -> UIImage {
-        let contextImage: UIImage = UIImage(CGImage: image.CGImage!)
-
-        let screenSize = UIScreen.mainScreen().bounds
         let imageSize = image.size
-        let cameraAspectRatio: CGFloat = 4.0 / 3.0
-        let imageHeight = screenSize.width * cameraAspectRatio
-        let topOverlayFrame = self.topOverlayView.frame
-        let cameraPreviewZoneFrame = self.cameraPreviewZoneView.frame
+        let screenSize = UIScreen.mainScreen().bounds
+        var expectedHeight: CGFloat = 1468
+        var expectedWidth: CGFloat = 2448
+        var startX: CGFloat = 952
+        var startY: CGFloat = 1442
 
-        let newX: CGFloat = 0
-        let newY: CGFloat = (topOverlayFrame.height / screenSize.height) * imageHeight
-        let newWidth: CGFloat = imageSize.width
-        let newHeight: CGFloat = (cameraPreviewZoneFrame.height / screenSize.height) * imageSize.height
-        
-        let newRect = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
+        expectedHeight = (cameraPreviewZoneView.bounds.height / screenSize.height) * imageSize.height
+        expectedWidth = expectedHeight * 1.6
+        startX = (imageSize.width - expectedWidth) / 2
+        startY = (imageSize.height - expectedHeight) / 2
 
-        let imageRef: CGImageRef = CGImageCreateWithImageInRect(contextImage.CGImage, newRect)!
+        let cropRect = CGRect(x: startX, y: startY, width: expectedWidth, height: expectedHeight)
+        let imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect)!
 
-        let newImage = UIImage(
-            CGImage: imageRef,
-            scale: image.scale,
-            orientation: image.imageOrientation
-        )
-        
+        let orientation = image.imageOrientation
+        let newImage = UIImage(CGImage: imageRef, scale: 1, orientation: orientation)
+
         return newImage
     }
 }

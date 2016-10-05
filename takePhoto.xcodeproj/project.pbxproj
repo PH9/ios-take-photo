@@ -14,6 +14,7 @@
 		65224CD51DA2667100EDBDD6 /* takePhoto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65224CD31DA2667100EDBDD6 /* takePhoto.xcdatamodeld */; };
 		65224CD71DA2667100EDBDD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65224CD61DA2667100EDBDD6 /* Assets.xcassets */; };
 		65224CDA1DA2667100EDBDD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65224CD81DA2667100EDBDD6 /* LaunchScreen.storyboard */; };
+		65E569D91DA5040700818680 /* UIImage+fixOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E569D81DA5040700818680 /* UIImage+fixOrientation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		65224CD61DA2667100EDBDD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65224CD91DA2667100EDBDD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		65224CDB1DA2667100EDBDD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65E569D81DA5040700818680 /* UIImage+fixOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+fixOrientation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				65224CD81DA2667100EDBDD6 /* LaunchScreen.storyboard */,
 				65224CDB1DA2667100EDBDD6 /* Info.plist */,
 				65224CD31DA2667100EDBDD6 /* takePhoto.xcdatamodeld */,
+				65E569D81DA5040700818680 /* UIImage+fixOrientation.swift */,
 			);
 			path = takePhoto;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			files = (
 				65224CCF1DA2667100EDBDD6 /* ViewController.swift in Sources */,
 				65224CD51DA2667100EDBDD6 /* takePhoto.xcdatamodeld in Sources */,
+				65E569D91DA5040700818680 /* UIImage+fixOrientation.swift in Sources */,
 				65224CCD1DA2667100EDBDD6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
