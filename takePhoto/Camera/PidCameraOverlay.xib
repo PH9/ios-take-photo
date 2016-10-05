@@ -8,8 +8,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="takePhoto" customModuleProvider="target">
             <connections>
+                <outlet property="cameraPreviewZoneView" destination="jtG-l4-lKh" id="T9C-4x-xfb"/>
                 <outlet property="pidCameraOverlayView" destination="iN0-l3-epB" id="B57-R6-eiC"/>
                 <outlet property="takePhotoButton" destination="wOF-Rr-Jmg" id="Uyj-2R-8OE"/>
+                <outlet property="topOverlayView" destination="a94-od-BTL" id="mgs-Vr-48d"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -38,12 +40,6 @@
                         <constraint firstItem="wOF-Rr-Jmg" firstAttribute="centerX" secondItem="n2g-D7-38H" secondAttribute="centerX" id="awo-rF-bxq"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jtG-l4-lKh">
-                    <rect key="frame" x="0.0" y="140" width="320" height="200"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="jtG-l4-lKh" secondAttribute="height" multiplier="1.6:1" id="2tb-fD-P57"/>
-                    </constraints>
-                </view>
                 <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a94-od-BTL">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                     <subviews>
@@ -58,6 +54,12 @@
                     <constraints>
                         <constraint firstItem="2M6-ER-fkm" firstAttribute="centerX" secondItem="a94-od-BTL" secondAttribute="centerX" id="27Y-QO-MPn"/>
                         <constraint firstAttribute="bottom" secondItem="2M6-ER-fkm" secondAttribute="bottom" constant="20" id="Fhk-q7-A4X"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jtG-l4-lKh">
+                    <rect key="frame" x="0.0" y="140" width="320" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="jtG-l4-lKh" secondAttribute="height" multiplier="1.6:1" id="2tb-fD-P57"/>
                     </constraints>
                 </view>
             </subviews>

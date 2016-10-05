@@ -14,8 +14,12 @@ class ViewController: UIViewController {
     
     @IBOutlet var pidCameraOverlayView: UIView!
     @IBOutlet weak var cameraPreviewImage: UIImageView!
+    
     @IBOutlet weak var takePhotoButton: UIButton!
     
+    @IBOutlet weak var topOverlayView: UIView!
+    @IBOutlet weak var cameraPreviewZoneView: UIView!
+
     private var imagePicker: UIImagePickerController!
     
     override func viewDidLoad() {
@@ -51,10 +55,10 @@ class ViewController: UIViewController {
         imagePicker.modalPresentationStyle = .CurrentContext
         imagePicker.sourceType = sourceType
         imagePicker.delegate = self
-        imagePicker.modalPresentationStyle = (sourceType == .Camera) ? .FullScreen : .Popover
+        imagePicker.modalPresentationStyle = .FullScreen
         
-        let presentationController = imagePicker.popoverPresentationController
-        presentationController?.permittedArrowDirections = .Any
+//        let presentationController = imagePicker.presentationController
+//        presentationController?.permittedArrowDirections = .Any
         
         if sourceType == .Camera {
             imagePicker.showsCameraControls = false
@@ -64,6 +68,16 @@ class ViewController: UIViewController {
             
             imagePicker.cameraOverlayView = self.pidCameraOverlayView
             self.pidCameraOverlayView = nil
+            
+            // AdjustPreviewSize
+            let screenSize = UIScreen.mainScreen().bounds.size
+            let cameraAspectRatio: CGFloat = 4.0 / 3.0
+            let cameraHeight = screenSize.width * cameraAspectRatio
+            let scale: CGFloat = screenSize.height / cameraHeight
+            let diffHeight = (screenSize.height - cameraHeight) / 2.0
+            
+            imagePicker.cameraViewTransform = CGAffineTransformMakeTranslation(0, diffHeight)
+            imagePicker.cameraViewTransform = CGAffineTransformScale(imagePicker.cameraViewTransform, scale, scale)
         }
         
         self.imagePicker = imagePicker
@@ -79,7 +93,7 @@ class ViewController: UIViewController {
     }
     
     private func finishAndUpdate() {
-        
+    
     }
 }
 
@@ -93,11 +107,34 @@ extension ViewController: UINavigationControllerDelegate, UIImagePickerControlle
         let mediaType = info[UIImagePickerControllerMediaType] as! String
         
         if mediaType == (kUTTypeImage as String) {
-            self.cameraPreviewImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+
+            self.cameraPreviewImage.image = pidCropImage(image!.fixOrientation())
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+
     
-    
+    private func pidCropImage(image: UIImage) -> UIImage {
+        let imageSize = image.size
+        let screenSize = UIScreen.mainScreen().bounds
+        var expectedHeight: CGFloat = 1468
+        var expectedWidth: CGFloat = 2448
+        var startX: CGFloat = 952
+        var startY: CGFloat = 1442
+
+        expectedHeight = (cameraPreviewZoneView.bounds.height / screenSize.height) * imageSize.height
+        expectedWidth = expectedHeight * 1.6
+        startX = (imageSize.width - expectedWidth) / 2
+        startY = (imageSize.height - expectedHeight) / 2
+
+        let cropRect = CGRect(x: startX, y: startY, width: expectedWidth, height: expectedHeight)
+        let imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect)!
+
+        let orientation = image.imageOrientation
+        let newImage = UIImage(CGImage: imageRef, scale: 1, orientation: orientation)
+
+        return newImage
+    }
 }
